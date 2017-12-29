@@ -4,6 +4,7 @@ var fetchbtn = document.querySelector('#fetch');
 var axiosbtn = document.querySelector('#axios');
 var display = document.querySelector('#quote');
 
+// XMLHTTPRequest (XHR)
 xhrbtn.addEventListener('click', function() {
     var XHR = new XMLHttpRequest();
     XHR.onreadystatechange = function() {
@@ -16,6 +17,7 @@ xhrbtn.addEventListener('click', function() {
     XHR.send();
 });
 
+// Fetch API
 fetchbtn.addEventListener('click', function() {
     fetch(url)
     .then(function(req) {
@@ -28,9 +30,21 @@ fetchbtn.addEventListener('click', function() {
     });
 });
 
+// jQuery
 $('#jquery').click(function() {
     $.getJSON(url)
     .done(function(data) {
         $('#quote').text(data[0]);
+    });
+});
+
+// Axios
+axiosbtn.addEventListener('click', function() {
+    axios.get(url)
+    .then(function(res) {
+        display.innerText = res.data[0];
+    })
+    .catch(function() {
+        alert('Error!');
     });
 });
